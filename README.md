@@ -4,4 +4,6 @@
 # To be added:
 # X-linked genes
 # Incomplete Dominance
-# Fix scrollbar
+# Add genotype/phenotype as probability?
+  #Also maybe use how close genes are on chromosome for more accuracy
+    #Two applications or windows? When opens, pick simple or complicated one?
