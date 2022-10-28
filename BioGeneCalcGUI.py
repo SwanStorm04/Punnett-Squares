@@ -29,9 +29,9 @@ class punnetGUI:
         self.spaceLabel = tkinter.Label(self.spaceFrame, text = "                                                                           ", font = "times 12 bold", bg = "mediumSpringGreen")
         self.spaceLabel.pack()
 
-        self.calcButton = tkinter.Button(self.buttonFrame, text="Calculate", command = self.calculate, width=17, bg="teal")
+        self.calcButton = tkinter.Button(self.buttonFrame, text="Calculate", command = self.calculate, width=15, bg="teal", font="times 16 bold")
         self.freeSpace = tkinter.Label(self.buttonFrame, text = "              ", bg = "mediumSpringGreen")
-        self.quitButton = tkinter.Button(self.buttonFrame, text =  "Quit", command = self.mainWindow.destroy, width=17, bg="teal")
+        self.quitButton = tkinter.Button(self.buttonFrame, text =  "Quit", command = self.mainWindow.destroy, width=15, bg="teal", font="times 16 bold")
         self.calcButton.pack(side = "left")
         self.freeSpace.pack(side = "left")
         self.quitButton.pack(side = "left")
@@ -50,12 +50,24 @@ class punnetGUI:
     def calculate(self):
 
         self.genoWindow = tkinter.Tk()
+        self.genoWindow.configure(bg = "mediumSpringGreen")
+        self.genoWindow.title("Genotypic Ratios")
+
+        genoLabel = tkinter.Label(self.genoWindow, bg = "mediumSpringGreen", text = "Genotype | Number", font = "times 22 bold")
+        genoSpace = tkinter.Label(self.genoWindow, bg = "mediumSpringGreen", text = "-------------------------------------")
+        genoLabel.grid(row = 0)
+        genoSpace.grid(row = 1)
 
         geneScroll = tkinter.Scrollbar(self.genoWindow)
+        genoScrollY = tkinter.Scrollbar(self.genoWindow, orient = tkinter.VERTICAL)
+        genoScrollY.grid(row = 2, column = 5, sticky = tkinter.N+tkinter.S)
+        genoScrollX = tkinter.Scrollbar(self.genoWindow, orient = tkinter.HORIZONTAL)
+        genoScrollX.grid(row = 3, sticky = tkinter.E+tkinter.W)
 
-        genoRatios = tkinter.Listbox(self.genoWindow, bg = "mediumSpringGreen")
-        genoLabel = tkinter.Label(self.genoWindow, bg = "mediumSpringGreen", text = "Genotype | Number          ")
-        genoSpace = tkinter.Label(self.genoWindow, bg = "mediumSpringGreen", text = "---------------------------")
+        genoRatios = tkinter.Listbox(self.genoWindow, bg = "mediumSpringGreen", font = "TkFixedFont", yscrollcommand = genoScrollY.set, xscrollcommand = genoScrollX.set, height = 20)
+        genoRatios.grid(row = 2, sticky = tkinter.S+tkinter.E+tkinter.W)
+        genoScrollX['command'] = genoRatios.xview
+        genoScrollY['command'] = genoRatios.yview
         
         line = 1
         momGenes = str(self.momEntry.get())
@@ -115,24 +127,35 @@ class punnetGUI:
             genoRatios.insert(line, str(biggest) + " | " + str(pair))
             line += 1
             #messageVar += str(biggest) + "\t\t" + str(pair) + "\n"
-        genoLabel.pack()
-        genoSpace.pack()
             
-        genoRatios.pack(side = "left")
-        geneScroll.pack(side = "right")
+        #genoRatios.pack()
+        #geneScroll.pack()
 
-        genoRatios.config(yscrollcommand=geneScroll.set)
-        geneScroll.config(command=genoRatios.yview)
+        #genoRatios.config(yscrollcommand=geneScroll.set)
+        #geneScroll.config(command=genoRatios.yview)
+
 
 
 
         self.phenoWindow = tkinter.Tk()
+        self.phenoWindow.configure(bg = "mediumSpringGreen")
+        self.phenoWindow.title("Phenotypic Ratios")
+
+        phenoLabel = tkinter.Label(self.phenoWindow, bg = "mediumSpringGreen", text = "Phenotype | Number", font = "times 22 bold")
+        phenoSpace = tkinter.Label(self.phenoWindow, bg = "mediumSpringGreen", text = "-------------------------------------")
+        phenoLabel.grid(row = 0)
+        phenoSpace.grid(row = 1)
 
         phenoScroll = tkinter.Scrollbar(self.phenoWindow)
+        phenoScrollY = tkinter.Scrollbar(self.phenoWindow, orient = tkinter.VERTICAL)
+        phenoScrollY.grid(row = 2, column = 5, sticky = tkinter.N+tkinter.S)
+        phenoScrollX = tkinter.Scrollbar(self.phenoWindow, orient = tkinter.HORIZONTAL)
+        phenoScrollX.grid(row = 3, sticky = tkinter.E+tkinter.W)
 
-        phenoRatios = tkinter.Listbox(self.phenoWindow, bg = "mediumSpringGreen")
-        phenoLabel = tkinter.Label(self.phenoWindow, bg = "mediumSpringGreen", text = "Phenotype | Number         ")
-        phenoSpace = tkinter.Label(self.phenoWindow, bg = "mediumSpringGreen", text = "---------------------------")
+        phenoRatios = tkinter.Listbox(self.phenoWindow, bg = "mediumSpringGreen", font = "TkFixedFont", yscrollcommand = phenoScrollY.set, xscrollcommand = phenoScrollX.set, height = 20)
+        phenoRatios.grid(row = 2, sticky = tkinter.S+tkinter.E+tkinter.W)
+        phenoScrollX['command'] = phenoRatios.xview
+        phenoScrollY['command'] = phenoRatios.yview
 
         phenoLine = 1
         kidPhenTypes = kidTypes.copy() # Making a copy of the genotype list
@@ -159,14 +182,8 @@ class punnetGUI:
             phenoRatios.insert(line, str(biggestPhen) + "  |  " + str(phenotype))
             line += 1
 
-        phenoLabel.pack()
-        phenoSpace.pack()
-
-        phenoRatios.pack(side = "left")
-        phenoScroll.pack(side = "right")
-
-        phenoRatios.config(yscrollcommand=phenoScroll.set)
-        phenoScroll.config(command=phenoRatios.yview)
+        #phenoRatios.config(yscrollcommand=phenoScroll.set)
+        #phenoScroll.config(command=phenoRatios.yview)
 
 
 genoCalc = punnetGUI()
