@@ -1,9 +1,7 @@
 # Punnett-Squares
-# This is a program that, from the parental genotypes, calculates the genotypic and phenotypic ratios of the offspring
 
-# To be added:
-# X-linked genes
-# Incomplete Dominance
-# Add genotype/phenotype as probability?
-  #Also maybe use how close genes are on chromosome for more accuracy
-    #Two applications or windows? When opens, pick simple or complicated one?
+This is a program that, from the parental genotypes, calculates the genotypic and phenotypic ratios of the offspring
+
+There are multiple versions of the program uploaded, some as .py and some as .exe
+The most recent is the file name ending with "efficient" compared to the GUI file, which was added as an original version
+More files, with separated functions, soon to arrive
